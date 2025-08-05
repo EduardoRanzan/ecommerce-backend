@@ -8,6 +8,7 @@ import { Module } from "@nestjs/common";
       isGlobal: true,
     }),
     TypeOrmModule.forRoot({
+      /*Add variaves de ambiente*/
       type: "postgres",
       host: process.env.DB_HOST,
       port: +process.env.DB_PORT!!,
