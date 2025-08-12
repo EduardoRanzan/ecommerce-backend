@@ -18,6 +18,6 @@ import { Module } from "@nestjs/common";
       autoLoadEntities: true,
       synchronize: true,
     }),
-  ],
+  ]
 })
 export class AppModule {}
