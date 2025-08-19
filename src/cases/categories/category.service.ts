@@ -1,21 +1,26 @@
 import { Repository } from "typeorm";
 import { Category } from "./category.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { Injectable } from "@nestjs/common"
+import { HttpException, HttpStatus, Injectable } from "@nestjs/common"
 
 @Injectable()
 export class CategoryService {
     constructor(
         @InjectRepository(Category)
-        private readonly repository: Repository<Category>
+        private readonly     repository: Repository<Category>
     ) {}
 
-    findAll(): Promise<Category[]> {
-        return this.repository.find()
+        findAll(): Promise<Category[]> {
+        return this.repository.find();
     }
 
-    findById(id: string): Promise<Category | null> {
-        return this.repository.findOneBy({ id: id })
+    async findById(id: string): Promise<Category | null> {
+        const found = await this.repository.findOneBy({ id: id })
+
+        if (!found) {
+            throw new HttpException('No categories found', HttpStatus.NOT_FOUND);
+        }
+        return found;
     }
 
     save(category: Category): Promise<Category> {

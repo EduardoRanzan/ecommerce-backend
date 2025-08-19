@@ -1,6 +1,7 @@
 import { ConfigModule } from "@nestjs/config";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { Module } from "@nestjs/common";
+import { CategoryModule } from "./cases/categories/category.module";
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { Module } from "@nestjs/common";
       autoLoadEntities: true,
       synchronize: true,
     }),
+  CategoryModule
   ]
 })
 export class AppModule {}
