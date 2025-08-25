@@ -14,8 +14,13 @@ export class BrandController {
     }
 
     @Get('/:id')
-    findById(@Param('id', ParseUUIDPipe) id: string): Promise<Brand | null>{
-        return this.service.findById(id);
+    async findById(@Param('id', ParseUUIDPipe) id: string): Promise<Brand | null>{
+        const found = await this.service.findById(id);
+        if (!found) {
+            throw new HttpException('Brand not found', HttpStatus.NOT_FOUND);
+        } else {
+            return found;   
+        }  
     }
 
     @Post()
@@ -30,15 +35,24 @@ export class BrandController {
         @Param('id', ParseUUIDPipe) id: string,
         @Body() Brand: Brand
     ): Promise<Brand> {
-        Brand.id = id;
-        
-        return this.service.save(Brand);
+        const found = await this.service.findById(id);
+        if (!found) {
+            throw new HttpException('Brand not found', HttpStatus.NOT_FOUND);
+        } else {
+            Brand.id = id;
+            
+            return this.service.save(Brand);
+        }
     }
 
     @Delete('/:id')
     @HttpCode(HttpStatus.NO_CONTENT)
     async delete(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
-        await this.service.remove(id);
-
+        const found = await this.service.findById(id);
+        if (!found) {
+            throw new HttpException('Brand not found', HttpStatus.NOT_FOUND);
+        } else {
+            await this.service.remove(id);
+        }  
     }
 }

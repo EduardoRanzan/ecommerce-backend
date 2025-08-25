@@ -14,13 +14,8 @@ export class CategoryService {
         return this.repository.find();
     }
 
-    async findById(id: string): Promise<Category | null> {
-        const found = await this.repository.findOneBy({ id: id })
-
-        if (!found) {
-            throw new HttpException('No categories found', HttpStatus.NOT_FOUND);
-        }
-        return found;
+    findById(id: string): Promise<Category | null> {
+        return this.repository.findOneBy({ id: id })
     }
 
     save(category: Category): Promise<Category> {

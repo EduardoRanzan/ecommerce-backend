@@ -14,13 +14,8 @@ export class BrandService {
         return this.repository.find();
     }
 
-    async findById(id: string): Promise<Brand | null> {
-        const found = await this.repository.findOneBy({ id: id })
-
-        if (!found) {
-            throw new HttpException('No categories found', HttpStatus.NOT_FOUND);
-        }
-        return found;
+    findById(id: string): Promise<Brand | null> {
+        return this.repository.findOneBy({ id: id })
     }
 
     save(Brand: Brand): Promise<Brand> {
