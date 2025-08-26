@@ -1,0 +1,22 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}products
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Coquinha gelada",
+    "description": "Descrição",
+    "price": 300,
+    "active": true,
+    "category": "df875e54-3c68-4230-bd48-9cc276e9e190",
+    "brand": "7a765da1-17ea-4f8c-9cc6-57493e425dc8"
+  }
+}
