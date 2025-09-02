@@ -4,6 +4,9 @@ import { Module } from "@nestjs/common";
 import { CategoryModule } from "./cases/categories/category.module";
 import { BrandModule } from "./cases/brands/brand.module";
 import { ProductModule } from "./cases/products/product.module";
+import { CityModule } from "./cases/cities/modules/city.module";
+import { CustomerModule } from "./cases/customers/customer.module";
+import { OrderModule } from "./cases/orders/modules/modules/order.module";
 
 @Module({
   imports: [
@@ -14,15 +17,15 @@ import { ProductModule } from "./cases/products/product.module";
       /*Add variaves de ambiente*/
       type: "postgres",
       host: process.env.DB_HOST,
-      port: +process.env.DB_PORT!,
+      port: Number(process.env.DB_PORT),
       username: process.env.DB_USER,
       password: process.env.DB_PASS,
       database: process.env.DB_NAME,
       autoLoadEntities: true,
       synchronize: true,
-      logging: true, //habilitar para ver as querys no console
+      logging: false, //habilitar para ver as querys no console
     }),
-  CategoryModule,BrandModule,ProductModule
+  CategoryModule,BrandModule,ProductModule,CityModule,CustomerModule,OrderModule
   ]
 })
 export class AppModule {}

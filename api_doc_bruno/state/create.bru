@@ -1,0 +1,19 @@
+meta {
+  name: create
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}states
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Nome do estado",
+    "ibge": "12",
+    "acronym": "EX"
+  }
+}

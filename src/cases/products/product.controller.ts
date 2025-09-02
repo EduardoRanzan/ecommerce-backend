@@ -1,14 +1,24 @@
+import { Category } from '../categories/category.entity';
+import { CategoryService } from '../categories/category.service';
 import { Product } from './product.entity';
 import { ProductService } from './product.service';
-import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, ParseUUIDPipe, Post, Put } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, ParseUUIDPipe, Post, Put, Query } from '@nestjs/common';
 
 @Controller('products')
 export class ProductController {
-  constructor(private readonly service: ProductService) {}
+  constructor(
+    private readonly service: ProductService,
+    private readonly categoryService: CategoryService
+  ) {}
 
   @Get()
-  findAll(): Promise<Product[]> {
-    return this.service.findAll();
+  async findAll(@Query('categoryId', ParseUUIDPipe) categoryId: string): Promise<Product[]> {
+    if (categoryId) { 
+      const category = await this.categoryService.findById(categoryId);
+      return this.service.findAll(category ? category : undefined);
+    } else {
+      return this.service.findAll();
+    }
   }
 
   @Get('/:id')

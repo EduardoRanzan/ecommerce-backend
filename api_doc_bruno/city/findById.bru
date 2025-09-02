@@ -1,11 +1,11 @@
 meta {
-  name: remove
+  name: findById
   type: http
-  seq: 5
+  seq: 2
 }
 
-delete {
-  url: {{host}}products/:id
+get {
+  url: {{host}}cities/:id
   body: none
   auth: none
 }

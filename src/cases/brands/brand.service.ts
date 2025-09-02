@@ -1,7 +1,7 @@
 import { Repository } from "typeorm";
 import { Brand } from "./brand.entity";
 import { InjectRepository } from "@nestjs/typeorm";
-import { HttpException, HttpStatus, Injectable } from "@nestjs/common"
+import { Injectable } from "@nestjs/common"
 
 @Injectable()
 export class BrandService {

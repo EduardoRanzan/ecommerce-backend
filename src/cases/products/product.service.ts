@@ -2,6 +2,7 @@ import { Repository } from 'typeorm';
 import { Product } from './product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
+import { Category } from '../categories/category.entity';
 
 @Injectable()
 export class ProductService {
@@ -10,8 +11,14 @@ export class ProductService {
     private readonly repository: Repository<Product>,
   ) {}
 
-  findAll(): Promise<Product[]> {
-    return this.repository.find();
+  findAll(category?: Category): Promise<Product[]> {
+    if (!category) {
+      return this.repository.find();
+    } else {
+      return this.repository.find({
+        where: { category: category }
+      });
+    }
   }
 
   findById(id: string): Promise<Product | null> {
@@ -25,4 +32,6 @@ export class ProductService {
   async remove(id: string): Promise<void> {
     await this.repository.delete(id);
   }
+
+
 }

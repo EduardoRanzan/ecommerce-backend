@@ -20,10 +20,10 @@ export class Product {
   active: boolean
 
   @ManyToOne(() => Category , { eager: true /*habilita para retornar no findAll etc*/, nullable: false})
-  @JoinColumn({ name: 'category_id' })
+  @JoinColumn({ name: 'categoryId' })
   category: Category;
 
   @ManyToOne(() => Brand, { eager: false, nullable: true })
-  @JoinColumn({ name: 'brand_id' })
+  @JoinColumn({ name: 'brandId' })
   brand: Brand;
 }
