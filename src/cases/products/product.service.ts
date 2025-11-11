@@ -3,6 +3,7 @@ import { Product } from './product.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Injectable } from '@nestjs/common';
 import { Category } from '../categories/category.entity';
+import { CategoryService } from '../categories/category.service';
 
 @Injectable()
 export class ProductService {
@@ -33,5 +34,14 @@ export class ProductService {
     await this.repository.delete(id);
   }
 
-
+  findByCategory(categoryId: string) {
+    return this.repository.find({
+      where: {
+        category: {
+          id: categoryId
+        },
+        active: true
+      }
+    })  
+  }
 }

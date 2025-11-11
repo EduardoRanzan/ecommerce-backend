@@ -10,7 +10,7 @@ export class CategoryService {
         private readonly     repository: Repository<Category>
     ) {}
 
-        findAll(): Promise<Category[]> {
+    findAll(): Promise<Category[]> {
         return this.repository.find();
     }
 

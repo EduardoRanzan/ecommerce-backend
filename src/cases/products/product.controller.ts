@@ -12,7 +12,7 @@ export class ProductController {
   ) {}
 
   @Get()
-  findAll(): Promise<Product[]> {
+  async findAll(): Promise<Product[]> {
       return this.service.findAll();
   }
 
@@ -57,5 +57,10 @@ export class ProductController {
     } else {
       await this.service.remove(id);
     }
+  }
+
+  @Get('/category/:categoryId')
+  findByCategory(@Param('categoryId') categoryId: string){
+    return this.service.findByCategory(categoryId)
   }
 }
