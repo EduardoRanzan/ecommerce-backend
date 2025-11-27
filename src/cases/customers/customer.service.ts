@@ -25,4 +25,8 @@ export class CustomerService {
     async remove(id: string): Promise<void> {
         await this.repository.delete(id)
     }
+
+    findBySupabaseId(supabaseId: string): Promise<Customer | null> {
+        return this.repository.findOneBy({ supabaseId: supabaseId });
+    }
 }

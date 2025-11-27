@@ -8,6 +8,7 @@ import { Module } from '@nestjs/common';
   imports: [TypeOrmModule.forFeature([Customer])],
   providers: [CustomerService],
   controllers: [CustomerController],
+  exports: [CustomerService],
 })
 
 export class CustomerModule {}

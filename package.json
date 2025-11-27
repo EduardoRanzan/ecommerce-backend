@@ -22,6 +22,7 @@
   "dependencies": {
     "@nestjs/config": "^4.0.2",
     "@nestjs/typeorm": "^11.0.0",
+    "@supabase/supabase-js": "^2.86.0",
     "common": "^0.2.5",
     "pg": "^8.16.3",
     "typeorm": "^0.3.25"
