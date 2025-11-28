@@ -10,13 +10,13 @@ export class Customer {
     @Column({ length: 60, nullable: false })
     name: string
 
-    @Column({ length: 250 })
+    @Column({ length: 250, nullable: true })
     address?: string
 
-    @Column({ length: 8 })
+    @Column({ length: 8, nullable: true })
     zipcode?: string
 
-    @ManyToOne(() => City , { eager: true, nullable: false})
+    @ManyToOne(() => City , { eager: true, nullable: true})
     @JoinColumn({ name: 'cityId' })
     city?: City;
 
